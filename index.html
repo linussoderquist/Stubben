@@ -1,17 +1,42 @@
-<!doctype html>
-<html>
+<!DOCTYPE html>
+<html lang="sv">
 <head>
-    <meta name='viewport' content='width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, viewport-fit=cover' />
-    <meta charset='utf-8'>
-    <link rel="stylesheet" type="text/css" href="styles.css">
-    <link rel="manifest" href="manifest.json">
-    <style></style>
-    <title>Stubbe</title>
-    <script src="playcanvas-stable.min.js"></script>
-    <script src="__settings__.js"></script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Supersplat Viewer</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #111;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    .viewer-wrapper {
+      max-width: 100%;
+      padding: 20px;
+      box-sizing: border-box;
+    }
+
+    iframe {
+      border: none;
+      width: 800px;
+      height: 500px;
+      max-width: 100%;
+      display: block;
+    }
+  </style>
 </head>
 <body>
-    <script src="__start__.js"></script>
-    <script src="__loading__.js"></script>
+  <div class="viewer-wrapper">
+    <iframe
+      id="viewer"
+      allow="fullscreen; xr-spatial-tracking"
+      src="https://superspl.at/s?id=ae5c632b">
+    </iframe>
+  </div>
 </body>
 </html>
