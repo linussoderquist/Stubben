@@ -3,22 +3,30 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Supersplat Viewer</title>
+  <title>Fjällstugan</title>
+
+  <!-- Leaflet CSS -->
+  <link
+    rel="stylesheet"
+    href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+  />
+
   <style>
     body {
       margin: 0;
       font-family: Arial, sans-serif;
       background: #111;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      min-height: 100vh;
+      color: #fff;
+      text-align: center;
+    }
+
+    h1 {
+      margin: 20px 0 10px;
+      font-size: 2rem;
     }
 
     .viewer-wrapper {
-      max-width: 100%;
-      padding: 20px;
-      box-sizing: border-box;
+      padding: 10px;
     }
 
     iframe {
@@ -26,11 +34,19 @@
       width: 800px;
       height: 500px;
       max-width: 100%;
-      display: block;
+    }
+
+    #map {
+      height: 400px;
+      width: 100%;
+      margin-top: 20px;
     }
   </style>
 </head>
 <body>
+
+  <h1>Fjällstugan</h1>
+
   <div class="viewer-wrapper">
     <iframe
       id="viewer"
@@ -38,5 +54,27 @@
       src="https://superspl.at/s?id=ae5c632b">
     </iframe>
   </div>
+
+  <div id="map"></div>
+
+  <!-- Leaflet JS -->
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+  <script>
+    const lat = 65.25766694931896;
+    const lon = 15.71001019792998;
+
+    const map = L.map('map').setView([lat, lon], 10);
+
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '&copy; OpenStreetMap contributors'
+    }).addTo(map);
+
+    L.marker([lat, lon])
+      .addTo(map)
+      .bindPopup("Fjällstugan")
+      .openPopup();
+  </script>
+
 </body>
 </html>
