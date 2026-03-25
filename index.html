@@ -37,7 +37,7 @@
     }
 
     #map {
-      height: 400px;
+      height: 450px;
       width: 100%;
       margin-top: 20px;
     }
@@ -66,14 +66,42 @@
 
     const map = L.map('map').setView([lat, lon], 10);
 
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    // Baslager
+    const osm = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       attribution: '&copy; OpenStreetMap contributors'
     }).addTo(map);
 
+    // SLU markfuktighet (WMS)
+    const soilMoisture = L.tileLayer.wms(
+      "https://gis-prod.slu.se/arcgis/services/markfuktighet/MapServer/WMSServer",
+      {
+        layers: "0",
+        format: "image/png",
+        transparent: true,
+        attribution: "SLU Markfuktighet"
+      }
+    );
+
+    // Marker
     L.marker([lat, lon])
       .addTo(map)
       .bindPopup("Fjällstugan")
       .openPopup();
+
+    // Lagerkontroll
+    const baseMaps = {
+      "OpenStreetMap": osm
+    };
+
+    const overlayMaps = {
+      "Markfuktighet (SLU)": soilMoisture
+    };
+
+    L.control.layers(baseMaps, overlayMaps).addTo(map);
+
+    // Slå på lagret direkt (valfritt)
+    soilMoisture.addTo(map);
+
   </script>
 
 </body>
